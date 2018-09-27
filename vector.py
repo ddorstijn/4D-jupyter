@@ -44,7 +44,8 @@ class VectorN:
 
     def normalize_reduce(self):
         reducer = self.data[-1]
-        self.data = [el / reducer for el in self.data[:-1]]
+        if reducer != 0:
+            self.data = [el / reducer for el in self.data[:-1]]
         self.data.pop()
 
     def homogeneous(self):

@@ -57,6 +57,9 @@ def project3d(vertices, dimensions):
         vertices[i].homogeneous()
         np.matmul(vertices[i].data, view_matrix)
         vertices[i].normalize_reduce()
+    
+    if dimensions - 1 != 3:
+        project3d(vertices, dimensions-1)
 
 def get_lookat_matrix(dimensions, from_point, to_point):
     """ Return the matrix based on 2 vectors. 
@@ -70,7 +73,7 @@ def get_lookat_matrix(dimensions, from_point, to_point):
         for j in range(dimensions):
             if (i+1) == j:
                 orthogonal_vectors[i][j] = 1.0
-        print(orthogonal_vectors[i])
+
     to_point.subtract(from_point)
     columns = np.identity(dimensions)
     to_point.normalize()
